@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
+//Première version à revoir
 public class MainActivity extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState){
