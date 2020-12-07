@@ -28,6 +28,8 @@ import static android.app.ProgressDialog.show;
 //Première version à revoir
 public class MainActivity extends AppCompatActivity {
 
+    private Alarm alarm;
+
     public void onCreate(Bundle savedInstanceState){
         //Chargement des informations du réveil
         charger();
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void sauver(){
         try {
-            ObjectOutputStream alarmOOS= new ObjectOutputStream(openFileOutput(“alarm.serial”,MODE_WORLD_WRITEABLE));
+            ObjectOutputStream alarmOOS= new ObjectOutputStream(openFileOutput(alarm.serial,MODE_WORLD_WRITEABLE));
             alarmOOS.writeObject(alarm);
             alarmOOS.flush();
             alarmOOS.close();
@@ -108,10 +110,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void affichage() {
     //Affichage de l’heure qui soit au format hh:mm.
-        String heureReveil = “”;
-        heureReveil += alarm.getHeure().hour >10 ? alarm.getHeure().hour : “0” + alarm.getHeure().hour;
-        heureReveil +=”:”;
-        heureReveil += alarm.getHeure().minute >10 ? alarm.getHeure().minute : “0” + alarm.getHeure().minute;
+        String heureReveil = "";
+        heureReveil += alarm.getHeure().hour >10 ? alarm.getHeure().hour : "0" + alarm.getHeure().hour;
+        heureReveil +=":";
+        heureReveil += alarm.getHeure().minute >10 ? alarm.getHeure().minute : "0" + alarm.getHeure().minute;
         CheckBox ck_alarm = (CheckBox)findViewById(R.id.heure);
         ck_alarm.setText(heureReveil);
         ck_alarm.setChecked(alarm.isActive());
