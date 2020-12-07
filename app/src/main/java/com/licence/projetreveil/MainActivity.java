@@ -1,6 +1,7 @@
 package com.licence.projetreveil;
 
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.text.format.Time;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Calendar;
+
+import static android.app.ProgressDialog.show;
+
 
 //Première version à revoir
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         //Chargement des informations du réveil
         charger();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
 
         affichage();
 
@@ -158,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
     //On ajoute le reveil au service de l’AlarmManager
             am.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis() + diff, pendingintent);
-            Toast.makeText(this, “Alarme programmé le ” + reveil.get(Calendar.DAY_OF_MONTH) + ” à ” + reveil.get(Calendar.HOUR_OF_DAY) + “:” + reveil.get(Calendar.MINUTE), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Alarme programmé le " + reveil.get(Calendar.DAY_OF_MONTH) + " à " + reveil.get(Calendar.HOUR_OF_DAY) + “:” + reveil.get(Calendar.MINUTE), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -167,11 +174,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             try {
-                Toast.makeText(context, “C’est l’heure !!!”,Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "C’est l’heure !!!",Toast.LENGTH_LONG).show();
     //On peut mettre ce que l’on veut. Vibreur, lecture d’un mp3 ou autre.
             }
             catch (Exception r) {
-                Toast.makeText(context, “Erreur.”,Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Erreur.",Toast.LENGTH_SHORT).show();
                 r.printStackTrace();
             }
         }
