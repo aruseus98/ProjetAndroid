@@ -1,13 +1,18 @@
 package com.licence.projetreveil.info.BDDAlarme;
-
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import androidx.annotation.Nullable;
+
 public class BDDAlarmeHelper extends SQLiteOpenHelper {
+
+    private static final String DATABASE_NAME = "Alarme.db";
+    private static final int DATABASE_VERSION = 1;
+
     //Variable pour la table UTILISATEUR
     public static final String TABLE_COMMENTS = "utilisateur";
     public static final String COLUMN_ID = "id";
-    //public static final String COLUMN_COMMENT = "comment";
     //Variable pour la table ALARME
     public static final String TABLE_COMMENTS2 = "alarme";
     public static final String COLUMN_ID2 = "id";
@@ -26,9 +31,6 @@ public class BDDAlarmeHelper extends SQLiteOpenHelper {
     public static final String COLUMN_COMMENT7 = "auteur";
     public static final String COLUMN_COMMENT8 = "année";
     public static final String COLUMN_COMMENT9 = "texte";
-
-    private static final String DATABASE_NAME = "Alarme.db";
-    private static final int DATABASE_VERSION = 1;
 
     // Commande sql pour la création de la base de données
     //TABLE UTILISATEUR
@@ -60,6 +62,10 @@ public class BDDAlarmeHelper extends SQLiteOpenHelper {
             + "text not null, " + COLUMN_COMMENT9
             + "text not null);";
 
+    public BDDAlarmeHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(DATABASE_CREATE);
@@ -78,4 +84,3 @@ public class BDDAlarmeHelper extends SQLiteOpenHelper {
     }
 }
 
-//Code à rajouter
